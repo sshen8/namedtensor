@@ -115,6 +115,10 @@ class NamedTensorBase:
             self._schema.get(dim)
         return self._merge(dims, name)
 
+    def unsqueeze(self, dim):
+        "Create new dimension of size one."
+        return self._split(self._schema._names[0], (dim, self._schema._names[0]), {dim: 1})
+
     def split(self, dim, names, **dim_sizes):
         "Split an of existing dimension into new dimensions."
         return self._split(dim, names, dim_sizes)
